@@ -16,7 +16,7 @@ def solve_numpy(n, beta):
   return roots
 
 
-def plot_points_numpy(n, beta):
+def plot_points_numpy(n, beta, save=False):
   center = (0, 0)
   radius = 1
   theta = np.linspace(0, 2*np.pi, 100)
@@ -26,22 +26,21 @@ def plot_points_numpy(n, beta):
   ax.plot(x, y, label='r = 1')
   ax.set_aspect('equal', adjustable="datalim")
   solutions = solve_numpy(n, beta)
-  print(solutions)
   real = solutions.real
   imag = solutions.imag
-  ax.scatter(real, imag, c='r')
-  plt.title(f"alpha  when beta = {round(beta, 2)}")
+  ax.scatter(real, imag, c='r', label=f'\u03B2 = {beta}, k = {n}')
+  plt.title(f"\u03B1  when \u03B2 = {round(beta, 2)}, k = {n}")
   plt.xlabel("Real")
   plt.ylabel("Imag")
-  plt.show()
-
+  if save:
+    plt.savefig(f"/home/rafayel/experiments/Paper-Dirichlet/codes/plots/beta_{round(beta, 2)}_k_{n}.jpeg")
 
 plt.style.use('seaborn-whitegrid')
-k = 5
+#k = 5
 beta = np.linspace(-0.99, 0.99, 10)
-print(beta)
+k = [3, 5, 10, 20, 50]
 for b in beta:
-    for k_ in range(3, k+1):
-        plot_points_numpy(k_, b)
+    for k_ in k:
+        plot_points_numpy(k_, b, save=True)
 
 
