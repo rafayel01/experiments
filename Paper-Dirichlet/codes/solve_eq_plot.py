@@ -89,7 +89,7 @@ def plot_points_numpy_together_onefig(n, beta, save=False):
       ax[j].legend(fontsize=8, loc='upper right')
   plt.tight_layout()
   if save:
-    plt.savefig(f"/home/rafayel/experiments/Paper-Dirichlet/codes/plots2/beta_{beta}_k_{i}_together.jpeg")
+    plt.savefig(f"beta_{beta}_k_{i}_together.png")
 
 
 plt.style.use('seaborn-whitegrid')
@@ -97,7 +97,7 @@ plt.style.use('seaborn-whitegrid')
 beta = np.array([0.11, 0.5+0.11j, 0.7]) #np.linspace(-0.99, 0.99, 10)
 #k = [3, 5, 10, 20, 50]
 k = np.arange(3, 21)
-#plot_points_numpy_together_onefig(k, beta, save=True)
-for b in beta:
-  plot_points_numpy_together(k, b, save=True)
+plot_points_numpy_together_onefig(k, beta, save=True)
+#for b in beta:
+#  plot_points_numpy_together(k, b, save=True)
 

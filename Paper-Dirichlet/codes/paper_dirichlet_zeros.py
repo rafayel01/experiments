@@ -1,5 +1,5 @@
 import numpy as np
-import pandas as pd
+#import pandas as pd
 import matplotlib.pyplot as plt
 import sympy
 
@@ -101,26 +101,33 @@ def plot_points_numpy(n):
   plt.ylabel("Imag")
   plt.show()
 
-def plot_points_numpy_together(n):
+def plot_points_numpy_together(n, save=False):
   center = (0, 0)
   radius = 1
   theta = np.linspace(0, 2*np.pi, 100)
   x = center[0] + radius*np.cos(theta)
   y = center[1] + radius*np.sin(theta)
   fig, ax = plt.subplots()
-  ax.plot(x, y, label='r = 1')
+  ax.plot(x, y)
   ax.set_aspect('equal', adjustable="datalim")
+  ax.set_xlim(-1.5, 1.5)
+  ax.set_ylim(-1.5, 1.5)
   for i in range(3, n + 1):
     solutions = solve_numpy(i)
     real = solutions.real
     imag = solutions.imag
-    ax.scatter(real, imag, c=colors[i-3])
+    ax.scatter(real, imag, c=colors[i-3], label=f'k={i}')
   plt.title(f"")
   plt.xlabel("Real")
   plt.ylabel("Imag")
-  plt.show()
+  plt.legend(loc='upper right', fontsize=9.5, frameon=False)
+  if save:
+    plt.savefig(f'k_{n}_together.jpeg')
 
-create_solve_eq(3)
+plt.style.use('seaborn-whitegrid')
+plot_points_numpy_together(20, save=True)
+
+#create_solve_eq(3)
 
 #plot_points_numpy(100)
 
