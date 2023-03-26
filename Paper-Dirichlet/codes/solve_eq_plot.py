@@ -61,7 +61,7 @@ def plot_points_numpy_together(n, beta, save=False):
   plt.ylabel("Imag")
   plt.legend(fontsize=9.5)
   if save:
-    plt.savefig(f"/home/rafayel/experiments/Paper-Dirichlet/codes/plots2/beta_{round(beta, 2)}_k_{i}.jpeg")
+    plt.savefig(f"/home/rafayel/experiments/Paper-Dirichlet/codes/plots2/beta_{round(beta, 2)}_k_{n}.jpeg")
 
 
 def plot_points_numpy_together_onefig(n, beta, save=False):
@@ -84,12 +84,12 @@ def plot_points_numpy_together_onefig(n, beta, save=False):
       else:
         ax[j].set_title(f"\u03B2 = {round(beta[j], 2)}")
       ax[j].set(xlabel = "Real", ylabel = "Imag")
-      ax[j].set_xlim([-1.5, 1.5])
-      ax[j].set_ylim([-1, 1])
+      ax[j].set_xlim(-1.5, 1.5)
+      ax[j].set_ylim(-1, 1)
       ax[j].legend(fontsize=8, loc='upper right')
   plt.tight_layout()
   if save:
-    plt.savefig(f"beta_{beta}_k_{i}_together.png")
+    plt.savefig(f"beta_{beta}_k_{n}_together.png")
 
 
 plt.style.use('seaborn-whitegrid')
