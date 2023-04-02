@@ -19,6 +19,8 @@ def solve_numpy(n, beta):
   return roots
 
 
+#print(solve_numpy(16, 0.2-0.8j))
+
 def plot_points_numpy(n, beta, save=False):
   center = (0, 0)
   radius = 1
@@ -40,6 +42,7 @@ def plot_points_numpy(n, beta, save=False):
 
 
 def plot_points_numpy_together(n, beta, save=False):
+  markers = ('^', 'o', '*', 'd' ,'s')
   center = (0, 0)
   radius = 1
   theta = np.linspace(0, 2*np.pi, 100)
@@ -52,19 +55,21 @@ def plot_points_numpy_together(n, beta, save=False):
     solutions = solve_numpy(i, beta)
     real = solutions.real
     imag = solutions.imag
-    ax.scatter(real, imag, c=colors[i-3], label=f'k = {i}')
-  if beta.imag == 0:
-    plt.title(f"\u03B2 = {round(beta.real, 2)}")
-  else:
-    plt.title(f"\u03B2 = {round(beta, 2)}")
+    ax.scatter(real, imag, c='black', label=f'k = {i}', marker=markers[np.where(k==i)[0][0]])
+  #if beta.imag == 0:
+  #  plt.title(f"\u03B2 = {round(beta.real, 2)}")
+  #else:
+  #  plt.title(f"\u03B2 = {round(beta, 2)}")
   plt.xlabel("Real")
   plt.ylabel("Imag")
   plt.legend(fontsize=9.5)
+  #plt.show()
   if save:
-    plt.savefig(f"/home/rafayel/experiments/Paper-Dirichlet/codes/plots2/beta_{round(beta, 2)}_k_{n}.jpeg")
+    plt.savefig(f"beta_{round(beta, 2)}_k_{n}.png")
 
 
 def plot_points_numpy_together_onefig(n, beta, save=False):
+  markers = ('^', 'o', '*', 'd' ,'s')
   center = (0, 0)
   radius = 1
   theta = np.linspace(0, 2*np.pi, 100)
@@ -78,7 +83,7 @@ def plot_points_numpy_together_onefig(n, beta, save=False):
       solutions = solve_numpy(i, beta[j])
       real = solutions.real
       imag = solutions.imag
-      ax[j].scatter(real, imag, c=colors[i-3], label=f'k = {i}')
+      ax[j].scatter(real, imag, c='black', label=f'k = {i}', marker=markers[np.where(k==i)[0][0]])
       if beta[j].imag == 0:
         ax[j].set_title(f"\u03B2 = {round(beta[j].real, 2)}")
       else:
@@ -96,8 +101,9 @@ plt.style.use('seaborn-whitegrid')
 #k = 5
 beta = np.array([0.2+0.3j, 0.4+0.5j]) #np.linspace(-0.99, 0.99, 10)
 #k = [3, 5, 10, 20, 50]
-k = np.arange(3, 21)
-plot_points_numpy_together_onefig(k, beta, save=True)
+k = np.array([3, 8, 15, 30])
+#plot_points_numpy_together_onefig(k, beta, save=True)
 #for b in beta:
 #  plot_points_numpy_together(k, b, save=True)
+plot_points_numpy_together(k, beta=0, save=True)
 

@@ -102,6 +102,7 @@ def plot_points_numpy(n):
   plt.show()
 
 def plot_points_numpy_together(n, save=False):
+  markers = ('^', 'o', '*', 'd' ,'s')
   center = (0, 0)
   radius = 1
   theta = np.linspace(0, 2*np.pi, 100)
@@ -112,25 +113,29 @@ def plot_points_numpy_together(n, save=False):
   ax.set_aspect('equal', adjustable="datalim")
   ax.set_xlim(-1.5, 1.5)
   ax.set_ylim(-1.5, 1.5)
-  for i in range(3, n + 1):
+  print(n)
+  for i in n:
     solutions = solve_numpy(i)
     real = solutions.real
     imag = solutions.imag
-    ax.scatter(real, imag, c=colors[i-3], label=f'k={i}')
+    ax.scatter(real, imag, c='black', label=f'k={i}', marker=markers[np.where(k==i)[0][0]])
   plt.title(f"")
   plt.xlabel("Real")
   plt.ylabel("Imag")
   plt.legend(loc='upper right', fontsize=9.5, frameon=False)
+  #plt.show()
   if save:
-    plt.savefig(f'k_{n}_together.jpeg')
+    plt.savefig(f'k_{n}_together.png')
 
 plt.style.use('seaborn-whitegrid')
-plot_points_numpy_together(20, save=True)
+
+k = np.array([3, 8, 15, 30])
+plot_points_numpy_together(k, save=True)
 
 #create_solve_eq(3)
 
 #plot_points_numpy(100)
 
-#plot_points_together(20, True)
+#plot_points_numpy_together(20, False)
 
 #plot_points_numpy_together(20)
